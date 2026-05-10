@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon May 11 00:06:37 2026
-
 @author: Admin
 """
-
 import streamlit as st
 import pickle
 import nltk
 import string
+import os
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
@@ -23,14 +22,16 @@ def preprocess(text):
     tokens = nltk.word_tokenize(text)
     tokens = [t for t in tokens if t.isalnum()]
     tokens = [t for t in tokens if t not in stopwords.words('english')]
-    # tokens = [ps.stem(t) for t in tokens]  # comment out hai toh yahan bhi mat karo
     return " ".join(tokens)
 
-folder = "models"
-sms_model   = pickle.load(open("sms_model.pkl", 'rb'))
-tfidf_sms   = pickle.load(open("tfidf_sms.pkl", 'rb'))
-email_model = pickle.load(open("email_model.pkl", 'rb'))
-tfidf_email = pickle.load(open("tfidf_email.pkl", 'rb'))
+# ✅ Fix: use absolute paths based on script location
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+sms_model   = pickle.load(open(os.path.join(BASE_DIR, "sms_model.pkl"),   'rb'))
+tfidf_sms   = pickle.load(open(os.path.join(BASE_DIR, "tfidf_sms.pkl"),   'rb'))
+email_model = pickle.load(open(os.path.join(BASE_DIR, "email_model.pkl"), 'rb'))
+tfidf_email = pickle.load(open(os.path.join(BASE_DIR, "tfidf_email.pkl"), 'rb'))
+
 st.title("🛡️ Scam Detector")
 st.subheader("Bhoomika & Nancy | ML Project")
 
@@ -46,7 +47,7 @@ if st.button("Check"):
         else:
             vec = tfidf_email.transform([processed])
             result = email_model.predict(vec)[0]
-        
+
         if result == 1:
             st.error("🚨 SPAM detected!")
         else:
