@@ -26,7 +26,7 @@ def preprocess(text):
     # tokens = [ps.stem(t) for t in tokens]  # comment out hai toh yahan bhi mat karo
     return " ".join(tokens)
 
-folder = r"C:\Users\Admin\OneDrive\Desktop\scam_project\models"
+folder = "models"
 sms_model   = pickle.load(open(f"{folder}/sms_model.pkl", 'rb'))
 tfidf_sms   = pickle.load(open(f"{folder}/tfidf_sms.pkl", 'rb'))
 email_model = pickle.load(open(f"{folder}/email_model.pkl", 'rb'))
