@@ -26,11 +26,12 @@ def preprocess(text):
 
 # ✅ Fix: use absolute paths based on script location
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "models")  # ✅ points to models folder
 
-sms_model   = pickle.load(open(os.path.join(BASE_DIR, "sms_model.pkl"),   'rb'))
-tfidf_sms   = pickle.load(open(os.path.join(BASE_DIR, "tfidf_sms.pkl"),   'rb'))
-email_model = pickle.load(open(os.path.join(BASE_DIR, "email_model.pkl"), 'rb'))
-tfidf_email = pickle.load(open(os.path.join(BASE_DIR, "tfidf_email.pkl"), 'rb'))
+sms_model   = pickle.load(open(os.path.join(MODELS_DIR, "sms_model.pkl"),   'rb'))
+tfidf_sms   = pickle.load(open(os.path.join(MODELS_DIR, "tfidf_sms.pkl"),   'rb'))
+email_model = pickle.load(open(os.path.join(MODELS_DIR, "email_model.pkl"), 'rb'))
+tfidf_email = pickle.load(open(os.path.join(MODELS_DIR, "tfidf_email.pkl"), 'rb'))
 
 st.title("🛡️ Scam Detector")
 st.subheader("Bhoomika & Nancy | ML Project")
