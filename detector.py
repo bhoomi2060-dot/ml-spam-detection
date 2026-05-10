@@ -27,11 +27,10 @@ def preprocess(text):
     return " ".join(tokens)
 
 folder = "models"
-sms_model   = pickle.load(open(f"{folder}/sms_model.pkl", 'rb'))
-tfidf_sms   = pickle.load(open(f"{folder}/tfidf_sms.pkl", 'rb'))
-email_model = pickle.load(open(f"{folder}/email_model.pkl", 'rb'))
-tfidf_email = pickle.load(open(f"{folder}/tfidf_email.pkl", 'rb'))
-
+sms_model   = pickle.load(open("sms_model.pkl", 'rb'))
+tfidf_sms   = pickle.load(open("tfidf_sms.pkl", 'rb'))
+email_model = pickle.load(open("email_model.pkl", 'rb'))
+tfidf_email = pickle.load(open("tfidf_email.pkl", 'rb'))
 st.title("🛡️ Scam Detector")
 st.subheader("Bhoomika & Nancy | ML Project")
 
